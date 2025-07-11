@@ -294,7 +294,7 @@ export default function RussianRummyTimer() {
                             Game Timer Setup
                         </p>
 
-                        {showInstallPrompt && (
+                        {(showInstallPrompt || !deferredPrompt) && (
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mx-4">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-3">
@@ -304,17 +304,25 @@ export default function RussianRummyTimer() {
                                                 Install App
                                             </p>
                                             <p className="text-xs text-blue-700">
-                                                Add to home screen for offline
-                                                use
+                                                {deferredPrompt
+                                                    ? "Add to home screen for offline use"
+                                                    : "Use browser menu to install"}
                                             </p>
                                         </div>
                                     </div>
                                     <Button
-                                        onClick={handleInstallClick}
+                                        onClick={
+                                            deferredPrompt
+                                                ? handleInstallClick
+                                                : () =>
+                                                      alert(
+                                                          "Use Chrome menu (⋮) → 'Add to Home screen'"
+                                                      )
+                                        }
                                         size="sm"
                                         className="bg-blue-600 hover:bg-blue-700 text-white"
                                     >
-                                        Install
+                                        {deferredPrompt ? "Install" : "Help"}
                                     </Button>
                                 </div>
                             </div>

@@ -1,1 +1,119 @@
-if(!self.define){let e,s={};const a=(a,n)=>(a=new URL(a+".js",n).href,s[a]||new Promise(s=>{if("document"in self){const e=document.createElement("script");e.src=a,e.onload=s,document.head.appendChild(e)}else e=a,importScripts(a),s()}).then(()=>{let e=s[a];if(!e)throw new Error(`Module ${a} didn’t register its module`);return e}));self.define=(n,t)=>{const i=e||("document"in self?document.currentScript.src:"")||location.href;if(s[i])return;let c={};const r=e=>a(e,i),o={module:{uri:i},exports:c,require:r};s[i]=Promise.all(n.map(e=>o[e]||r(e))).then(e=>(t(...e),c))}}define(["./workbox-1bb06f5e"],function(e){"use strict";importScripts(),self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next/app-build-manifest.json",revision:"7075e45cb15d7a0480e81cb510d2003e"},{url:"/_next/static/chunks/4bd1b696-dcf7b20e7e08a849.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/684-964a9da44b452370.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/832-47a0011098b81634.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/app/_not-found/page-a16974e62ddb7ea2.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/app/layout-93e2cc92d1ba2fcd.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/app/page-1cf669571fa81426.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/framework-b326bfe0905a39d9.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/main-55154ba9467fc12a.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/main-app-6bc12839ea807beb.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/pages/_app-da15c11dea942c36.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/pages/_error-cc3f077a18ea1793.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/chunks/polyfills-42372ed130431b0a.js",revision:"846118c33b2c0e922d7b3a7676f81f6f"},{url:"/_next/static/chunks/webpack-a87dceded5ee0d50.js",revision:"saN75iFybsvhVXFfgKtBD"},{url:"/_next/static/css/96a5376a44c37b4f.css",revision:"96a5376a44c37b4f"},{url:"/_next/static/saN75iFybsvhVXFfgKtBD/_buildManifest.js",revision:"e7ac8479043ecfe785d0a4c7e19745bb"},{url:"/_next/static/saN75iFybsvhVXFfgKtBD/_ssgManifest.js",revision:"b6652df95db52feb4daf4eca35380933"},{url:"/index.html",revision:"398185a432f837c59871644c30e58f12"},{url:"/manifest.json",revision:"1dccb508e1316a781429753ec0ddd324"},{url:"/placeholder-logo.png",revision:"95d8d1a4a9bbcccc875e2c381e74064a"},{url:"/placeholder-logo.svg",revision:"1e16dc7df824652c5906a2ab44aef78c"},{url:"/placeholder-user.jpg",revision:"7ee6562646feae6d6d77e2c72e204591"},{url:"/placeholder.jpg",revision:"1e533b7b4545d1d605144ce893afc601"},{url:"/placeholder.svg",revision:"35707bd9960ba5281c72af927b79291f"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[{cacheWillUpdate:async({request:e,response:s,event:a,state:n})=>s&&"opaqueredirect"===s.type?new Response(s.body,{status:200,statusText:"OK",headers:s.headers}):s}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts-webfonts",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:31536e3})]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,new e.StaleWhileRevalidate({cacheName:"google-fonts-stylesheets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,new e.StaleWhileRevalidate({cacheName:"static-font-assets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,new e.StaleWhileRevalidate({cacheName:"static-image-assets",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/image\?url=.+$/i,new e.StaleWhileRevalidate({cacheName:"next-image",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp3|wav|ogg)$/i,new e.CacheFirst({cacheName:"static-audio-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp4)$/i,new e.CacheFirst({cacheName:"static-video-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:js)$/i,new e.StaleWhileRevalidate({cacheName:"static-js-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:css|less)$/i,new e.StaleWhileRevalidate({cacheName:"static-style-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/data\/.+\/.+\.json$/i,new e.StaleWhileRevalidate({cacheName:"next-data",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:json|xml|csv)$/i,new e.NetworkFirst({cacheName:"static-data-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(({url:e})=>{if(!(self.origin===e.origin))return!1;const s=e.pathname;return!s.startsWith("/api/auth/")&&!!s.startsWith("/api/")},new e.NetworkFirst({cacheName:"apis",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:16,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(({url:e})=>{if(!(self.origin===e.origin))return!1;return!e.pathname.startsWith("/api/")},new e.NetworkFirst({cacheName:"others",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(({url:e})=>!(self.origin===e.origin),new e.NetworkFirst({cacheName:"cross-origin",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:3600})]}),"GET")});
+const CACHE_NAME = "russian-rummy-v1.0.0"
+const urlsToCache = [
+  "/",
+  "/setup",
+  "/game",
+  "/manifest.json",
+  "/_next/static/css/app/layout.css",
+  "/_next/static/chunks/webpack.js",
+  "/_next/static/chunks/main.js",
+  "/_next/static/chunks/pages/_app.js",
+  "/icon-192x192.png",
+  "/icon-512x512.png",
+]
+
+// Install event - cache resources
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log("Opened cache")
+        return cache.addAll(urlsToCache)
+      })
+      .catch((error) => {
+        console.log("Cache install failed:", error)
+      }),
+  )
+  self.skipWaiting()
+})
+
+// Activate event - clean up old caches
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log("Deleting old cache:", cacheName)
+            return caches.delete(cacheName)
+          }
+        }),
+      )
+    }),
+  )
+  self.clients.claim()
+})
+
+// Fetch event - serve from cache, fallback to network
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      // Return cached version or fetch from network
+      if (response) {
+        return response
+      }
+
+      return fetch(event.request)
+        .then((response) => {
+          // Don't cache non-successful responses
+          if (!response || response.status !== 200 || response.type !== "basic") {
+            return response
+          }
+
+          // Clone the response
+          const responseToCache = response.clone()
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache)
+          })
+
+          return response
+        })
+        .catch(() => {
+          // Return offline page for navigation requests
+          if (event.request.destination === "document") {
+            return caches.match("/")
+          }
+        })
+    }),
+  )
+})
+
+// Background sync for game state
+self.addEventListener("sync", (event) => {
+  if (event.tag === "background-sync") {
+    event.waitUntil(
+      // Handle background sync if needed
+      console.log("Background sync triggered"),
+    )
+  }
+})
+
+// Push notifications (for future use)
+self.addEventListener("push", (event) => {
+  const options = {
+    body: event.data ? event.data.text() : "New notification",
+    icon: "/icon-192x192.png",
+    badge: "/icon-72x72.png",
+    vibrate: [200, 100, 200],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1,
+    },
+    actions: [
+      {
+        action: "explore",
+        title: "Open Game",
+        icon: "/icon-192x192.png",
+      },
+      {
+        action: "close",
+        title: "Close",
+        icon: "/icon-192x192.png",
+      },
+    ],
+  }
+
+  event.waitUntil(self.registration.showNotification("Russian Rummy Timer", options))
+})

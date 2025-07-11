@@ -288,7 +288,7 @@ export default function RussianRummyTimer() {
                 <div className="max-w-2xl mx-auto space-y-8 pt-8">
                     <div className="text-center space-y-4">
                         <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                            Russian Rummy
+                            Russian Rummy Wiiou
                         </h1>
                         <p className="text-xl text-gray-600">
                             Game Timer Setup

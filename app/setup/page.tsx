@@ -30,6 +30,11 @@ export default function SetupPage() {
     }
   }, [])
 
+  // Prevent SSR issues
+  if (typeof window === "undefined") {
+    return null
+  }
+
   const addPlayer = () => {
     if (players.length < 8) {
       setPlayers([...players, ""])

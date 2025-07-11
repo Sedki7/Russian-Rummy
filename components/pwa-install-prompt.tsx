@@ -71,7 +71,11 @@ export function PWAInstallPrompt() {
 
     // Show manual instructions after some time if no prompt appeared
     const timer = setTimeout(() => {
-      if (!deferredPrompt && !isInstalled && !sessionStorage.getItem("installPromptDismissed")) {
+      if (
+        !deferredPrompt &&
+        !isInstalled &&
+        (typeof window === "undefined" || !sessionStorage.getItem("installPromptDismissed"))
+      ) {
         setShowManualInstructions(true)
       }
     }, 5000)
@@ -104,7 +108,9 @@ export function PWAInstallPrompt() {
   const handleDismiss = () => {
     setShowInstallPrompt(false)
     setShowManualInstructions(false)
-    sessionStorage.setItem("installPromptDismissed", "true")
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("installPromptDismissed", "true")
+    }
   }
 
   const handleShowManualInstructions = () => {
@@ -113,7 +119,7 @@ export function PWAInstallPrompt() {
   }
 
   // Don't show if already installed or dismissed
-  if (isInstalled || sessionStorage.getItem("installPromptDismissed")) {
+  if (isInstalled || (typeof window !== "undefined" && sessionStorage.getItem("installPromptDismissed"))) {
     return null
   }
 

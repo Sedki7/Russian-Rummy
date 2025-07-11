@@ -13,9 +13,14 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "Russian Rummy Timer",
-    startupImage: "/icon-512x512.png",
+    startupImage: [
+      {
+        url: "/icon-512x512.png",
+        media: "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)",
+      },
+    ],
   },
   formatDetection: {
     telephone: false,
@@ -51,27 +56,71 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Essential PWA meta tags */}
         <link rel="icon" href="/icon-192x192.png" />
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="/icon-152x152.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icon-192x192.png" />
+
+        {/* iOS PWA support */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Russian Rummy Timer" />
+
+        {/* Android PWA support */}
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Russian Rummy Timer" />
+
+        {/* Windows PWA support */}
         <meta name="msapplication-TileColor" content="#4f46e5" />
         <meta name="msapplication-TileImage" content="/icon-144x144.png" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="application-name" content="Russian Rummy Timer" />
 
-        {/* PWA Debug Info */}
+        {/* Prevent zoom and ensure full screen */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+
+        {/* PWA Debug and Detection Script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              console.log('PWA Debug Info:');
-              console.log('User Agent:', navigator.userAgent);
-              console.log('Display Mode:', window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser');
-              console.log('Service Worker Support:', 'serviceWorker' in navigator);
+              // PWA Detection and Debug
+              window.addEventListener('load', function() {
+                console.log('=== PWA Debug Info ===');
+                console.log('User Agent:', navigator.userAgent);
+                console.log('Display Mode:', window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser');
+                console.log('Service Worker Support:', 'serviceWorker' in navigator);
+                console.log('Is PWA:', window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone);
+                console.log('Screen:', screen.width + 'x' + screen.height);
+                console.log('Viewport:', window.innerWidth + 'x' + window.innerHeight);
+                
+                // Check if running as PWA
+                if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                  document.body.classList.add('pwa-mode');
+                  console.log('✅ Running as PWA - Standalone mode active');
+                } else {
+                  console.log('❌ Running in browser - Not installed as PWA');
+                }
+              });
+              
+              // Prevent default browser behaviors in PWA mode
+              if (window.matchMedia('(display-mode: standalone)').matches) {
+                // Prevent pull-to-refresh
+                document.addEventListener('touchstart', function(e) {
+                  if (e.touches.length > 1) {
+                    e.preventDefault();
+                  }
+                }, { passive: false });
+                
+                // Prevent zoom
+                document.addEventListener('touchmove', function(e) {
+                  if (e.scale !== 1) {
+                    e.preventDefault();
+                  }
+                }, { passive: false });
+              }
             `,
           }}
         />

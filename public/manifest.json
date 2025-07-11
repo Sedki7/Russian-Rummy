@@ -2,7 +2,7 @@
   "name": "Russian Rummy Timer",
   "short_name": "RussianRummy",
   "description": "A game timer and player manager for Russian Rummy card games",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
@@ -66,7 +66,7 @@
       "name": "Quick Start",
       "short_name": "Start",
       "description": "Start a new game quickly",
-      "url": "/setup",
+      "url": "/setup?source=shortcut",
       "icons": [
         {
           "src": "/icon-192x192.png",
@@ -78,10 +78,18 @@
   ],
   "screenshots": [
     {
-      "src": "/screenshot-narrow.png",
+      "src": "/screenshot1.png",
       "sizes": "540x720",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "narrow",
+      "label": "Game Timer Screen"
+    },
+    {
+      "src": "/screenshot2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Player Setup Screen"
     }
   ]
 }

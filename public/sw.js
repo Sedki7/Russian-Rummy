@@ -1,15 +1,18 @@
-const CACHE_NAME = "russian-rummy-v1.0.1"
+const CACHE_NAME = "russian-rummy-v1.0.2"
 const urlsToCache = [
   "/",
   "/setup",
   "/game",
   "/manifest.json",
+  "/icon-72x72.png",
+  "/icon-96x96.png",
+  "/icon-128x128.png",
+  "/icon-144x144.png",
+  "/icon-152x152.png",
   "/icon-192x192.png",
+  "/icon-384x384.png",
   "/icon-512x512.png",
-  // Add more specific Next.js assets
-  "/_next/static/css/app/layout.css",
-  "/_next/static/chunks/webpack.js",
-  "/_next/static/chunks/main.js",
+  "/offline.html",
 ]
 
 // Install event - cache resources
@@ -20,7 +23,7 @@ self.addEventListener("install", (event) => {
       .open(CACHE_NAME)
       .then((cache) => {
         console.log("Opened cache")
-        return cache.addAll(urlsToCache.map((url) => new Request(url, { credentials: "same-origin" })))
+        return cache.addAll(urlsToCache)
       })
       .catch((error) => {
         console.log("Cache install failed:", error)
@@ -56,8 +59,8 @@ self.addEventListener("fetch", (event) => {
     return
   }
 
-  // Skip chrome-extension requests
-  if (event.request.url.startsWith("chrome-extension://")) {
+  // Skip chrome-extension and other non-http requests
+  if (!event.request.url.startsWith("http")) {
     return
   }
 
@@ -87,27 +90,24 @@ self.addEventListener("fetch", (event) => {
         .catch(() => {
           // Return offline page for navigation requests
           if (event.request.destination === "document") {
-            return caches.match("/")
+            return caches.match("/offline.html") || caches.match("/")
           }
         })
     }),
   )
 })
 
-// Background sync for game state
+// Handle background sync
 self.addEventListener("sync", (event) => {
   if (event.tag === "background-sync") {
-    event.waitUntil(
-      // Handle background sync if needed
-      console.log("Background sync triggered"),
-    )
+    event.waitUntil(console.log("Background sync triggered"))
   }
 })
 
-// Push notifications (for future use)
+// Handle push notifications
 self.addEventListener("push", (event) => {
   const options = {
-    body: event.data ? event.data.text() : "New notification",
+    body: event.data ? event.data.text() : "Russian Rummy Timer notification",
     icon: "/icon-192x192.png",
     badge: "/icon-72x72.png",
     vibrate: [200, 100, 200],
@@ -117,7 +117,7 @@ self.addEventListener("push", (event) => {
     },
     actions: [
       {
-        action: "explore",
+        action: "open",
         title: "Open Game",
         icon: "/icon-192x192.png",
       },
@@ -130,6 +130,15 @@ self.addEventListener("push", (event) => {
   }
 
   event.waitUntil(self.registration.showNotification("Russian Rummy Timer", options))
+})
+
+// Handle notification clicks
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close()
+
+  if (event.action === "open") {
+    event.waitUntil(clients.openWindow("/"))
+  }
 })
 
 // Message handling

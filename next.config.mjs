@@ -1,17 +1,5 @@
-import nextPwa from 'next-pwa';
-
-const isDev = process.env.NODE_ENV === 'development';
-
-const withPwa = nextPwa({
-  dest: 'public',
-  disable: isDev,
-  register: true,
-  skipWaiting: true,
-});
-
-const config = {
-  reactStrictMode: true,
-  swcMinify: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -21,6 +9,6 @@ const config = {
   images: {
     unoptimized: true,
   },
-};
+}
 
-export default withPwa(config);
+export default nextConfig
